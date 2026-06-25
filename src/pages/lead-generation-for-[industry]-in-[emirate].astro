@@ -1,0 +1,312 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { INDUSTRIES } from '../data/industries';
+import { EMIRATES } from '../data/emirates';
+import { SITE } from '../data/site';
+
+export function getStaticPaths() {
+  const paths = [];
+  for (const industry of INDUSTRIES) {
+    for (const emirate of EMIRATES) {
+      paths.push({
+        params: { industry: industry.slug, emirate: emirate.slug },
+        props: { industry, emirate },
+      });
+    }
+  }
+  return paths;
+}
+
+const { industry, emirate } = Astro.props;
+
+const pageTitle = `${industry.nameEn} Lead Generation in ${emirate.nameEn}, UAE | Digital Hype`;
+const pageDesc = `${industry.nameEn} lead generation in ${emirate.nameEn}, UAE — landing pages, Meta Ads & SEO for ${industry.termEn} in ${emirate.nameEn}. First leads in 7 days. 30-day money-back guarantee.`;
+const canonical = `${SITE.domain}/lead-generation-for-${industry.slug}-in-${emirate.slug}`;
+const keywords = `${industry.nameEn.toLowerCase()} lead generation ${emirate.nameEn}, lead generation for ${industry.termEn} in ${emirate.nameEn}, ${industry.nameEn.toLowerCase()} marketing agency ${emirate.nameEn}, SEO agency ${emirate.nameEn}, digital marketing ${emirate.nameEn} UAE, ${industry.nameEn.toLowerCase()} leads ${emirate.nameEn}`;
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": `Digital Hype - ${industry.nameEn} Marketing ${emirate.nameEn}`,
+    "image": `${SITE.domain}/logo.png`,
+    "description": pageDesc,
+    "areaServed": { "@type": "City", "name": emirate.nameEn },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": emirate.lat,
+      "longitude": emirate.lon
+    },
+    "url": canonical,
+    "telephone": "+971-56-958-3090",
+    "parentOrganization": { "@id": `${SITE.domain}/#organization` }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": `${industry.nameEn} Lead Generation`,
+    "areaServed": [
+      { "@type": "Country", "name": "United Arab Emirates" },
+      { "@type": "City", "name": emirate.nameEn }
+    ],
+    "provider": { "@id": `${SITE.domain}/#organization` },
+    "description": pageDesc,
+    "url": canonical
+  },
+  ...(industry.faqItems?.length ? [{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": industry.faqItems.map(item => ({
+      "@type": "Question",
+      "name": item.q,
+      "acceptedAnswer": { "@type": "Answer", "text": item.a }
+    }))
+  }] : [])
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  canonical={canonical}
+  ogImage={industry.hero}
+  keywords={keywords}
+  schema={schema}
+  hreflangEn={canonical}
+  hreflangAr={`${SITE.domain}/ar/lead-generation-for-${industry.slug}-in-${emirate.slug}`}
+  speakableSelectors={['h1', '.speakable']}
+  breadcrumbs={[
+    { name: 'Home', url: SITE.domain },
+    { name: `${industry.nameEn} Lead Generation UAE`, url: `${SITE.domain}/${industry.slug}` },
+    { name: `${industry.nameEn} Lead Generation ${emirate.nameEn}`, url: canonical }
+  ]}
+  pageType="ItemPage"
+>
+  <!-- Hero -->
+  <section class="relative min-h-[70svh] flex flex-col items-center justify-center pt-28 pb-16 px-4 md:px-6 overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-30 mix-blend-screen pointer-events-none">
+      <img src={emirate.hero} fetchpriority="high" alt={`${emirate.nameEn} business district`} class="w-full h-full object-cover" width="1920" height="1080" />
+      <div class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black"></div>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="max-w-[1200px] mx-auto w-full z-10 mb-8">
+      <nav aria-label="Breadcrumb" class="text-xs text-gray-500">
+        <ol class="flex gap-2 items-center flex-wrap" itemscope itemtype="https://schema.org/BreadcrumbList">
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="/" itemprop="item" class="hover:text-white transition-colors"><span itemprop="name">Home</span></a>
+            <meta itemprop="position" content="1" />
+          </li>
+          <li class="text-gray-700">/</li>
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href={`/${industry.slug}`} itemprop="item" class="hover:text-white transition-colors"><span itemprop="name">{industry.nameEn}</span></a>
+            <meta itemprop="position" content="2" />
+          </li>
+          <li class="text-gray-700">/</li>
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <span itemprop="name" class="text-gray-300">{emirate.nameEn}</span>
+            <meta itemprop="position" content="3" />
+          </li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="max-w-[900px] mx-auto text-center z-10 reveal active">
+      <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-black/40 backdrop-blur-xl mb-8">
+        <span class="text-xs font-semibold tracking-[0.2em] uppercase text-gray-300">
+          {industry.nameEn} · {emirate.nameEn} · UAE
+        </span>
+      </div>
+
+      <h1 class="text-4xl md:text-6xl font-bold font-display tracking-tighter mb-6">
+        Lead Generation for<br />
+        <span class="text-accent-green">{industry.nameEn}</span> in {emirate.nameEn}
+      </h1>
+
+      <p class="speakable text-lg md:text-xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed mb-10">
+        Digital Hype builds a hyperfast landing page, Meta Ads and organic SEO system specifically for
+        <strong class="text-white">{industry.termEn}</strong> in {emirate.nameEn}.
+        Qualified leads in 7 days or your money back.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a
+          href="/#get-started"
+          class="px-8 py-4 bg-[#CE1126] text-white rounded-full font-bold w-full sm:w-auto text-center hover:scale-105 transition-transform duration-300 shadow-[0_0_30px_rgba(206,17,38,0.4)]"
+        >
+          Get My Lead Funnel
+        </a>
+        <a
+          href="/#why-it-works"
+          class="px-8 py-4 bg-black/50 backdrop-blur-lg border border-white/20 text-white rounded-full font-bold w-full sm:w-auto text-center hover:bg-white hover:text-black transition-colors duration-300"
+        >
+          See How It Works
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Market Context -->
+  <section class="py-16 px-4 md:px-6 border-t border-white/5 relative z-10">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center reveal">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-display font-bold mb-6">
+            The {emirate.nameEn} {industry.nameEn} Market
+          </h2>
+          <p class="text-gray-400 leading-relaxed mb-6">{emirate.marketContextEn}</p>
+          <div class="flex items-center gap-3 text-sm text-gray-400">
+            <svg class="w-4 h-4 text-[#00cc53]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+            </svg>
+            <span>Hubs: {emirate.hubs}</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bento-card p-6 text-center">
+            <div class="text-3xl font-display font-bold text-[#00cc53] mb-2">7 Days</div>
+            <div class="text-xs text-gray-400">Kickoff to first leads</div>
+          </div>
+          <div class="bento-card p-6 text-center">
+            <div class="text-3xl font-display font-bold text-white mb-2">50%</div>
+            <div class="text-xs text-gray-400">Average CPL reduction</div>
+          </div>
+          <div class="bento-card p-6 text-center">
+            <div class="text-3xl font-display font-bold text-white mb-2">30 Days</div>
+            <div class="text-xs text-gray-400">Money-back guarantee</div>
+          </div>
+          <div class="bento-card p-6 text-center border-t-2 border-t-[#CE1126]">
+            <div class="text-3xl font-display font-bold text-[#CE1126] mb-2">500+</div>
+            <div class="text-xs text-gray-400">Clients globally</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Areas We Cover -->
+  <section class="py-14 px-4 md:px-6 border-t border-white/5 relative z-10">
+    <div class="max-w-[1200px] mx-auto reveal">
+      <h2 class="text-2xl md:text-3xl font-display font-bold mb-3 text-center">
+        {industry.nameEn} Lead Generation Across All {emirate.nameEn} Areas
+      </h2>
+      <p class="speakable text-gray-400 text-center max-w-2xl mx-auto mb-8 text-sm leading-relaxed">
+        Digital Hype covers every district and neighbourhood in {emirate.nameEn}. Whether your {industry.nameEn.toLowerCase()} business is in {emirate.districts.slice(0, 3).join(', ')} or anywhere across {emirate.nameEn}, our landing pages, Meta Ads and SEO system will put your offer in front of qualified buyers.
+      </p>
+      <div class="flex flex-wrap gap-2 justify-center">
+        {emirate.districts.map(district => (
+          <span class="px-3 py-1.5 rounded-full border border-white/10 text-xs text-gray-400 bg-white/[0.02]">
+            {district}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Do -->
+  <section class="py-16 px-4 md:px-6 bg-[#030303] border-y border-white/5 relative z-10">
+    <div class="max-w-[1200px] mx-auto reveal">
+      <h2 class="text-3xl md:text-4xl font-display font-bold text-center mb-4">
+        What Digital Hype builds for {industry.termEn} in {emirate.nameEn}
+      </h2>
+      <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12">
+        A complete lead acquisition system — not just ads, not just SEO, but all three working as one engine.
+      </p>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bento-card p-8">
+          <div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-white mb-3 font-display text-lg">Hyperfast Landing Page</h3>
+          <p class="text-sm text-gray-400 leading-relaxed">
+            A conversion-optimised page built for {industry.termEn} in {emirate.nameEn}. Mobile-first, Arabic/English toggle, single enquiry path.
+          </p>
+        </div>
+        <div class="bento-card p-8 border-t-2 border-t-[#CE1126]">
+          <div class="w-10 h-10 rounded-xl bg-[#CE1126]/10 border border-[#CE1126]/20 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#CE1126]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-white mb-3 font-display text-lg">Precision Meta Ads</h3>
+          <p class="text-sm text-gray-400 leading-relaxed">
+            Targeting the right buyers for your {industry.nameEn.toLowerCase()} business in {emirate.nameEn} by income, location, language and behaviour.
+          </p>
+        </div>
+        <div class="bento-card p-8 border-t-2 border-t-[#00732F]">
+          <div class="w-10 h-10 rounded-xl bg-[#00732F]/10 border border-[#00732F]/20 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-[#00cc53]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <h3 class="font-bold text-white mb-3 font-display text-lg">Programmatic SEO</h3>
+          <p class="text-sm text-gray-400 leading-relaxed">
+            Dominating search results across all 7 UAE emirates for {industry.nameEn.toLowerCase()} lead generation keywords.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  {industry.faqItems?.length > 0 && (
+    <section class="py-16 md:py-24 px-4 md:px-6 relative z-10 border-t border-white/5">
+      <div class="max-w-[900px] mx-auto">
+        <h2 class="text-3xl md:text-4xl font-display font-bold text-center mb-12 reveal">
+          Frequently Asked Questions
+        </h2>
+        <div class="space-y-4 reveal">
+          {industry.faqItems.map(item => (
+            <div class="bento-card p-6 border-l-2 border-l-white/10">
+              <h3 class="font-bold text-white mb-3 font-display text-lg">{item.q}</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">{item.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <section id="get-started" class="py-20 md:py-32 px-4 md:px-6 bg-[#030303] relative z-10 border-t border-white/5">
+    <div class="max-w-[700px] mx-auto text-center reveal">
+      <h2 class="text-4xl md:text-5xl font-display font-bold mb-6">
+        Ready to generate leads for your {industry.nameEn.toLowerCase()} business in {emirate.nameEn}?
+      </h2>
+      <p class="text-gray-400 mb-10">Fill in the form below and we'll build your personalised funnel plan within 24 hours.</p>
+      <form class="space-y-4 text-left" name="lead-enquiry" method="POST" data-netlify="true">
+        <input type="hidden" name="source" value={`lead-gen-${industry.slug}-${emirate.slug}`} />
+        <div class="grid md:grid-cols-2 gap-4">
+          <input type="text" name="name" placeholder="Your Name" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-white/30 transition-colors" />
+          <input type="email" name="email" placeholder="Email Address" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-white/30 transition-colors" />
+        </div>
+        <input type="tel" name="phone" placeholder="WhatsApp Number (with country code)" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-white/30 transition-colors" />
+        <textarea name="message" placeholder={`Tell us about your ${industry.nameEn.toLowerCase()} business in ${emirate.nameEn}...`} rows={3} class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-white/30 transition-colors resize-none"></textarea>
+        <button type="submit" class="w-full py-4 bg-[#CE1126] text-white rounded-full font-bold hover:bg-[#ff1a33] transition-colors duration-300 shadow-[0_0_30px_rgba(206,17,38,0.4)]">
+          Get My Funnel Plan →
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Internal links to all emirates for this industry -->
+  <section class="py-12 px-4 md:px-6 border-t border-white/5 relative z-10">
+    <div class="max-w-[1200px] mx-auto">
+      <h2 class="text-xl font-display font-bold text-white mb-6 text-center">
+        {industry.nameEn} Lead Generation Across the UAE
+      </h2>
+      <div class="flex flex-wrap gap-3 justify-center">
+        {EMIRATES.map(em => (
+          <a
+            href={`/lead-generation-for-${industry.slug}-in-${em.slug}`}
+            class={`px-4 py-2 rounded-full text-sm border transition-colors ${em.slug === emirate.slug ? 'bg-white text-black border-white font-bold' : 'border-white/20 text-gray-400 hover:border-white/40 hover:text-white'}`}
+          >
+            {em.nameEn}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

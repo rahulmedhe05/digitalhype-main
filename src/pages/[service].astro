@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { INDUSTRIES } from '../data/industries';
+import { EMIRATES } from '../data/emirates';
+import { SITE } from '../data/site';
+
+export function getStaticPaths() {
+  return INDUSTRIES.map(industry => ({
+    params: { service: industry.slug },
+    props: { industry },
+  }));
+}
+
+const { industry } = Astro.props;
+
+const pageTitle = `${industry.nameEn} Lead Generation Dubai & UAE | Digital Hype`;
+const pageDesc = `${industry.nameEn} lead generation in Dubai & UAE — landing pages, Meta Ads & SEO for ${industry.termEn} across all 7 Emirates. First leads in 7 days. 30-day money-back guarantee.`;
+const canonical = `${SITE.domain}/${industry.slug}`;
+const keywords = `${industry.nameEn.toLowerCase()} lead generation dubai, ${industry.nameEn.toLowerCase()} marketing agency UAE, ${industry.nameEn.toLowerCase()} SEO dubai, ${industry.nameEn.toLowerCase()} meta ads UAE, lead generation for ${industry.termEn} dubai`;
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": `${industry.nameEn} Lead Generation UAE`,
+    "description": pageDesc,
+    "provider": { "@id": `${SITE.domain}/#organization` },
+    "areaServed": [
+      { "@type": "Country", "name": "United Arab Emirates" },
+      { "@type": "City", "name": "Dubai" },
+      { "@type": "City", "name": "Abu Dhabi" }
+    ],
+    "url": canonical
+  },
+  ...(industry.faqItems?.length ? [{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": industry.faqItems.map(item => ({
+      "@type": "Question",
+      "name": item.q,
+      "acceptedAnswer": { "@type": "Answer", "text": item.a }
+    }))
+  }] : [])
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  canonical={canonical}
+  ogImage={industry.hero}
+  ogTitle={`${industry.nameEn} Lead Generation Dubai & UAE | Digital Hype`}
+  ogDescription={pageDesc}
+  keywords={keywords}
+  schema={schema}
+  hreflangEn={canonical}
+  hreflangAr={`${SITE.domain}/ar/${industry.slug}`}
+  speakableSelectors={['h1', 'h2', '.speakable']}
+  breadcrumbs={[
+    { name: 'Home', url: SITE.domain },
+    { name: `${industry.nameEn} Lead Generation UAE`, url: canonical }
+  ]}
+>
+  <!-- Hero -->
+  <section class="relative min-h-[80svh] flex flex-col items-center justify-center pt-28 pb-16 px-4 md:px-6 overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-40 mix-blend-screen pointer-events-none">
+      <img src={industry.hero} fetchpriority="high" alt={`${industry.nameEn} businesses UAE`} class="w-full h-full object-cover" width="1920" height="1080" />
+      <div class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black"></div>
+    </div>
+
+    <div class="max-w-[1000px] mx-auto text-center z-10 reveal active">
+      <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-black/40 backdrop-blur-xl mb-8">
+        <span class="text-xs font-semibold tracking-[0.2em] uppercase text-gray-300">
+          UAE Lead Generation · {industry.nameEn}
+        </span>
+      </div>
+
+      <h1 class="text-4xl md:text-7xl font-bold font-display tracking-tighter mb-6">
+        {industry.nameEn}<br /><span class="text-glow italic">Lead Generation</span><br />
+        <span class="text-accent-green">across the UAE</span>
+      </h1>
+
+      <h2 class="text-xl md:text-2xl font-display font-semibold text-gray-300 mb-6">
+        Hyperfast landing page + Meta Ads + Organic SEO — one system, 7 days to first leads.
+      </h2>
+
+      <p class="text-base md:text-lg text-gray-400 max-w-2xl mx-auto font-light leading-relaxed mb-10">
+        {pageDesc}
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+        <a href="/#get-started" class="px-8 py-4 bg-[#CE1126] text-white rounded-full font-bold w-full sm:w-auto text-center hover:scale-105 transition-transform duration-300 shadow-[0_0_30px_rgba(206,17,38,0.4)]">
+          Get My Funnel Plan
+        </a>
+        <a href="#emirates" class="px-8 py-4 bg-black/50 backdrop-blur-lg border border-white/20 text-white rounded-full font-bold w-full sm:w-auto text-center hover:bg-white hover:text-black transition-colors duration-300">
+          See Coverage Map
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto text-center">
+        <div>
+          <div class="text-3xl font-display font-bold text-[#00cc53]">7 Days</div>
+          <div class="text-xs text-gray-400 mt-1">To first leads</div>
+        </div>
+        <div>
+          <div class="text-3xl font-display font-bold text-white">50%</div>
+          <div class="text-xs text-gray-400 mt-1">CPL reduction avg.</div>
+        </div>
+        <div>
+          <div class="text-3xl font-display font-bold text-white">30 Days</div>
+          <div class="text-xs text-gray-400 mt-1">Money-back guarantee</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UAE Coverage Map -->
+  <section id="emirates" class="py-20 px-4 md:px-6 bg-[#030303] border-y border-white/5 relative z-10">
+    <div class="max-w-[1200px] mx-auto">
+      <h2 class="text-3xl md:text-4xl font-display font-bold text-center mb-4 reveal">
+        {industry.nameEn} Lead Generation — All 7 Emirates
+      </h2>
+      <p class="text-gray-400 text-center max-w-2xl mx-auto mb-12 reveal stagger-1">
+        Every programmatic page is optimised for local search intent in that specific emirate.
+      </p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 reveal stagger-2">
+        {EMIRATES.map(emirate => (
+          <a
+            href={`/lead-generation-for-${industry.slug}-in-${emirate.slug}`}
+            class="bento-card p-6 group hover:border-[#00732F]/50 transition-all duration-300"
+          >
+            <div class="flex items-start justify-between mb-3">
+              <h3 class="font-bold text-white font-display">{emirate.nameEn}</h3>
+              <svg class="w-4 h-4 text-gray-600 group-hover:text-[#00cc53] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </div>
+            <p class="text-xs text-gray-500">{emirate.hubs}</p>
+            <div class="mt-4 text-xs font-medium text-[#00cc53] opacity-0 group-hover:opacity-100 transition-opacity">
+              View {industry.nameEn} leads →
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  {industry.faqItems?.length > 0 && (
+    <section class="py-16 md:py-24 px-4 md:px-6 relative z-10 border-t border-white/5">
+      <div class="max-w-[900px] mx-auto">
+        <h2 class="text-3xl md:text-4xl font-display font-bold text-center mb-12 reveal">
+          {industry.nameEn} Lead Generation — FAQ
+        </h2>
+        <div class="space-y-4 reveal">
+          {industry.faqItems.map(item => (
+            <div class="bento-card p-6 border-l-2 border-l-white/10">
+              <h3 class="font-bold text-white mb-3 font-display text-lg">{item.q}</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">{item.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA -->
+  <section id="get-started" class="py-20 px-4 md:px-6 bg-[#030303] relative z-10 border-t border-white/5">
+    <div class="max-w-[600px] mx-auto text-center reveal">
+      <h2 class="text-4xl font-display font-bold mb-4">
+        Start generating {industry.nameEn.toLowerCase()} leads this week
+      </h2>
+      <p class="text-gray-400 mb-10">Fill in the brief and we'll send your funnel plan within 24 hours.</p>
+      <a href="/" class="inline-block px-10 py-5 bg-[#CE1126] text-white rounded-full font-bold text-lg hover:bg-[#ff1a33] transition-colors duration-300 shadow-[0_0_40px_rgba(206,17,38,0.4)]">
+        Get My Free Funnel Plan →
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,414 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  ogType?: string;
+  hreflangEn?: string;
+  hreflangAr?: string;
+  lang?: string;
+  schema?: object | object[];
+  keywords?: string;
+  noindex?: boolean;
+  breadcrumbs?: { name: string; url: string }[];
+  speakableSelectors?: string[];
+  pageType?: 'WebPage' | 'AboutPage' | 'ContactPage' | 'CollectionPage' | 'ItemPage';
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogTitle,
+  ogDescription,
+  ogImage = '/hero.webp',
+  ogType = 'website',
+  hreflangEn,
+  hreflangAr,
+  lang = 'en',
+  schema,
+  keywords,
+  noindex = false,
+  breadcrumbs,
+  speakableSelectors = ['h1', 'h2', '.speakable'],
+  pageType = 'WebPage',
+} = Astro.props;
+
+const resolvedOgTitle = ogTitle ?? title;
+const resolvedOgDesc = ogDescription ?? description;
+const ogImageUrl = `${SITE.domain}${ogImage}`;
+const today = new Date().toISOString().split('T')[0];
+
+// ── AEO: Base schema graph ────────────────────────────────────────────────────
+const baseGraph: object[] = [
+  // 1. Organization — full entity with knowledge panel signals
+  {
+    "@type": "Organization",
+    "@id": `${SITE.domain}/#organization`,
+    "name": "Yantramayaa Designs Private Limited",
+    "alternateName": ["Digital Hype", "Digital Hype UAE", "ديجيتال هايب"],
+    "url": SITE.domain,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${SITE.domain}/logo.png`,
+      "width": 512,
+      "height": 512,
+      "caption": "Digital Hype Logo"
+    },
+    "image": `${SITE.domain}/hero.webp`,
+    "description": "Digital Hype (Yantramayaa Designs Private Limited) is the premier B2B lead generation and programmatic SEO agency in the UAE. We build hyperfast landing pages, Meta Ads campaigns and programmatic SEO systems for 14 industries across all 7 UAE emirates.",
+    "foundingDate": "2022",
+    "numberOfEmployees": { "@type": "QuantitativeValue", "minValue": 10, "maxValue": 50 },
+    "telephone": SITE.phone,
+    "email": "hello@digitalhype.online",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Dubai",
+      "addressRegion": "Dubai",
+      "addressCountry": "AE",
+      "addressCountryName": "United Arab Emirates"
+    },
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": SITE.phone,
+        "contactType": "customer service",
+        "areaServed": "AE",
+        "availableLanguage": ["English", "Arabic"],
+        "hoursAvailable": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Sunday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      },
+      {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "availableLanguage": ["English", "Arabic"],
+        "url": `${SITE.domain}/#get-started`
+      }
+    ],
+    "areaServed": [
+      { "@type": "Country", "name": "United Arab Emirates", "sameAs": "https://www.wikidata.org/wiki/Q878" },
+      { "@type": "City", "name": "Dubai", "sameAs": "https://www.wikidata.org/wiki/Q612" },
+      { "@type": "City", "name": "Abu Dhabi", "sameAs": "https://www.wikidata.org/wiki/Q35178" },
+      { "@type": "City", "name": "Sharjah" },
+      { "@type": "City", "name": "Ajman" },
+      { "@type": "City", "name": "Ras Al Khaimah" }
+    ],
+    "knowsAbout": [
+      "Lead Generation",
+      "Programmatic SEO",
+      "Meta Ads",
+      "Landing Page Optimization",
+      "B2B Marketing UAE",
+      "Digital Marketing Dubai",
+      "Pay-Per-Click Advertising",
+      "Search Engine Optimization"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Digital Hype Services",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Hyperfast Landing Page", "description": "Conversion-optimised landing page for UAE businesses", "price": "399", "priceCurrency": "AED" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Programmatic SEO UAE", "description": "7-emirate programmatic SEO coverage", "price": "1999", "priceCurrency": "AED" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Meta Ads Management", "description": "Performance-based Meta Ads for UAE businesses" } }
+      ]
+    },
+    "sameAs": [
+      SITE.googleReviewUrl,
+      "https://design.yantramayaa.com"
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "47",
+      "bestRating": "5",
+      "worstRating": "1"
+    }
+  },
+
+  // 2. LocalBusiness
+  {
+    "@type": ["LocalBusiness", "ProfessionalService"],
+    "@id": `${SITE.domain}/#localbusiness`,
+    "name": "Digital Hype UAE",
+    "parentOrganization": { "@id": `${SITE.domain}/#organization` },
+    "url": SITE.domain,
+    "telephone": SITE.phone,
+    "priceRange": "$$",
+    "currenciesAccepted": "AED, USD",
+    "paymentAccepted": "Bank Transfer, Credit Card",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Dubai",
+      "addressCountry": "AE"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "25.2048",
+      "longitude": "55.2708"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Sunday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      }
+    ],
+    "areaServed": ["Dubai","Abu Dhabi","Sharjah","Ajman","Fujairah","Ras Al Khaimah","Umm Al Quwain"],
+    "serviceArea": {
+      "@type": "GeoCircle",
+      "geoMidpoint": { "@type": "GeoCoordinates", "latitude": "25.2048", "longitude": "55.2708" },
+      "geoRadius": "500000"
+    }
+  },
+
+  // 3. WebSite + SearchAction (sitelinks searchbox)
+  {
+    "@type": "WebSite",
+    "@id": `${SITE.domain}/#website`,
+    "url": SITE.domain,
+    "name": "Digital Hype",
+    "description": "UAE Lead Generation — Hyperfast Landing Pages, Meta Ads & Programmatic SEO",
+    "publisher": { "@id": `${SITE.domain}/#organization` },
+    "inLanguage": ["en-AE", "ar-AE"],
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `${SITE.domain}/?s={search_term_string}`
+      },
+      "query-input": "required name=search_term_string"
+    }
+  },
+
+  // 4. Current WebPage with Speakable
+  {
+    "@type": pageType,
+    "@id": `${canonical}#webpage`,
+    "url": canonical,
+    "name": resolvedOgTitle,
+    "description": resolvedOgDesc,
+    "isPartOf": { "@id": `${SITE.domain}/#website` },
+    "about": { "@id": `${SITE.domain}/#organization` },
+    "datePublished": "2024-01-01",
+    "dateModified": today,
+    "inLanguage": lang === 'ar' ? "ar-AE" : "en-AE",
+    "publisher": { "@id": `${SITE.domain}/#organization` },
+    "image": {
+      "@type": "ImageObject",
+      "url": ogImageUrl,
+      "width": 1200,
+      "height": 630
+    },
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": speakableSelectors
+    },
+    "breadcrumb": breadcrumbs ? {
+      "@type": "BreadcrumbList",
+      "itemListElement": breadcrumbs.map((crumb, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": crumb.name,
+        "item": crumb.url
+      }))
+    } : {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": SITE.domain }
+      ]
+    }
+  }
+];
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth bg-black">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  {keywords && <meta name="keywords" content={keywords} />}
+  {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+  <!-- Canonical & hreflang -->
+  <link rel="canonical" href={canonical} />
+  {hreflangEn && <link rel="alternate" hreflang="en" href={hreflangEn} />}
+  {hreflangAr && <link rel="alternate" hreflang="ar" href={hreflangAr} />}
+  {hreflangEn && <link rel="alternate" hreflang="x-default" href={hreflangEn} />}
+
+  <!-- Open Graph -->
+  <meta property="og:type" content={ogType} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:title" content={resolvedOgTitle} />
+  <meta property="og:description" content={resolvedOgDesc} />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content={lang === 'ar' ? 'ar_AE' : 'en_AE'} />
+  <meta property="og:site_name" content="Digital Hype" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={resolvedOgTitle} />
+  <meta name="twitter:description" content={resolvedOgDesc} />
+  <meta name="twitter:image" content={ogImageUrl} />
+
+  <!-- Favicon -->
+  <link rel="icon" href="/logo.png" type="image/png" />
+
+  <!-- Performance hints -->
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+  <!-- Fonts -->
+  <link
+    href="https://api.fontshare.com/v2/css?f[]=space-grotesk@300,400,500,600,700&f[]=inter@300,400,500,600&display=swap"
+    rel="stylesheet"
+    media="print"
+    onload="this.media='all'"
+  />
+  <noscript>
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=space-grotesk@300,400,500,600,700&f[]=inter@300,400,500,600&display=swap"
+      rel="stylesheet"
+    />
+  </noscript>
+
+  <!-- GTM -->
+  <script is:inline define:vars={{ gtmId: SITE.gtmId }}>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+    var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+    j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+    f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',gtmId);
+  </script>
+
+  <!-- GA4 -->
+  <script is:inline define:vars={{ ga4Id: SITE.ga4Id }} async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.ga4Id}`}></script>
+  <script is:inline define:vars={{ ga4Id: SITE.ga4Id }}>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', ga4Id);
+  </script>
+
+  <!-- Meta Pixel -->
+  <script is:inline define:vars={{ pixelId: SITE.pixelId }}>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', pixelId);
+    fbq('track', 'PageView');
+  </script>
+
+  <!-- AEO: Full Schema Graph (Organization + LocalBusiness + WebSite + WebPage + Speakable + page-specific) -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": schema
+      ? [...baseGraph, ...(Array.isArray(schema) ? schema : [schema])]
+      : baseGraph
+  })} />
+</head>
+
+<body class="antialiased">
+  <!-- GTM noscript -->
+  <noscript>
+    <iframe
+      src={`https://www.googletagmanager.com/ns.html?id=${SITE.gtmId}`}
+      height="0" width="0" style="display:none;visibility:hidden"
+    ></iframe>
+  </noscript>
+  <!-- Meta Pixel noscript -->
+  <noscript>
+    <img
+      height="1" width="1" style="display:none"
+      src={`https://www.facebook.com/tr?id=${SITE.pixelId}&ev=PageView&noscript=1`}
+    />
+  </noscript>
+
+  <div class="ambient-mesh" id="parallax-bg"></div>
+  <div
+    class="fixed inset-0 pointer-events-none opacity-[0.015] z-[-1]"
+    style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 40px 40px;"
+  ></div>
+
+  <Nav lang={lang} />
+
+  <main>
+    <slot />
+  </main>
+
+  <Footer lang={lang} />
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach(e => e.isIntersecting && e.target.classList.add('active')),
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    if (navbar) {
+      window.addEventListener('scroll', () => {
+        navbar.style.background = window.scrollY > 50
+          ? 'rgba(0,0,0,0.9)'
+          : 'transparent';
+        navbar.style.backdropFilter = window.scrollY > 50 ? 'blur(20px)' : 'none';
+        navbar.style.borderBottom = window.scrollY > 50 ? '1px solid rgba(255,255,255,0.05)' : 'none';
+      }, { passive: true });
+    }
+
+    // Mobile menu
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const openIcon = document.getElementById('menu-icon-open');
+    const closeIcon = document.getElementById('menu-icon-close');
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.contains('translate-x-0');
+        mobileMenu.classList.toggle('translate-x-0', !isOpen);
+        mobileMenu.classList.toggle('translate-x-full', isOpen);
+        openIcon?.classList.toggle('opacity-0', !isOpen);
+        closeIcon?.classList.toggle('opacity-0', isOpen);
+        document.body.style.overflow = isOpen ? '' : 'hidden';
+      });
+      mobileMenu.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('translate-x-0');
+          mobileMenu.classList.add('translate-x-full');
+          openIcon?.classList.remove('opacity-0');
+          closeIcon?.classList.add('opacity-0');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+
+    // Mouse glow
+    const glow = document.querySelector('.mouse-glow') as HTMLElement | null;
+    if (glow) {
+      document.addEventListener('mousemove', (e) => {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+      }, { passive: true });
+    }
+  </script>
+</body>
+</html>

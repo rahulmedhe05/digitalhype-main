@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { INDUSTRIES } from '../../data/industries';
+import { EMIRATES } from '../../data/emirates';
+import { SITE } from '../../data/site';
+
+export function getStaticPaths() {
+  const paths = [];
+  for (const industry of INDUSTRIES) {
+    for (const emirate of EMIRATES) {
+      paths.push({
+        params: { industry: industry.slug, emirate: emirate.slug },
+        props: { industry, emirate },
+      });
+    }
+  }
+  return paths;
+}
+
+const { industry, emirate } = Astro.props;
+
+const pageTitle = `توليد عملاء ${industry.nameAr} في ${emirate.nameAr}، الإمارات | ديجيتال هايب`;
+const pageDesc = `توليد عملاء ${industry.nameAr} في ${emirate.nameAr} — صفحات هبوط وإعلانات ميتا وSEO لـ ${industry.termAr} في ${emirate.nameAr}. أول عملاء خلال 7 أيام مع ضمان استرداد 30 يوماً.`;
+const keywords = `توليد عملاء ${industry.nameAr} ${emirate.nameAr}, تسويق ${industry.nameAr} ${emirate.nameAr}, وكالة SEO ${emirate.nameAr}, إعلانات ميتا ${emirate.nameAr}`;
+const canonical = `${SITE.domain}/ar/lead-generation-for-${industry.slug}-in-${emirate.slug}`;
+const enPage = `${SITE.domain}/lead-generation-for-${industry.slug}-in-${emirate.slug}`;
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+  canonical={canonical}
+  ogImage={industry.hero}
+  lang="ar"
+  keywords={keywords}
+  hreflangEn={enPage}
+  hreflangAr={canonical}
+  speakableSelectors={['h1', '.speakable']}
+  breadcrumbs={[
+    { name: 'الرئيسية', url: SITE.domain },
+    { name: `توليد عملاء ${industry.nameAr} الإمارات`, url: `${SITE.domain}/${industry.slug}` },
+    { name: `توليد عملاء ${industry.nameAr} ${emirate.nameAr}`, url: canonical }
+  ]}
+  pageType="ItemPage"
+>
+  <section class="relative min-h-[70svh] flex flex-col items-center justify-center pt-28 pb-16 px-4 md:px-6 overflow-hidden" dir="rtl">
+    <div class="absolute inset-0 z-0 opacity-30 mix-blend-screen pointer-events-none">
+      <img src={emirate.hero} fetchpriority="high" alt={`${emirate.nameAr} منطقة الأعمال`} class="w-full h-full object-cover" width="1920" height="1080" />
+      <div class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black"></div>
+    </div>
+
+    <div class="max-w-[900px] mx-auto text-center z-10 reveal active">
+      <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-black/40 backdrop-blur-xl mb-8">
+        <span class="text-xs font-semibold tracking-[0.2em] uppercase text-gray-300">
+          {industry.nameAr} · {emirate.nameAr} · الإمارات
+        </span>
+      </div>
+
+      <h1 class="text-4xl md:text-6xl font-bold font-display tracking-tighter mb-6">
+        توليد العملاء لقطاع<br />
+        <span class="text-accent-green">{industry.nameAr}</span> في {emirate.nameAr}
+      </h1>
+
+      <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed mb-10">
+        ديجيتال هايب تبني نظام صفحة هبوط فائقة السرعة وإعلانات ميتا وSEO عضوي مخصص لـ
+        <strong class="text-white">{industry.termAr}</strong> في {emirate.nameAr}.
+        عملاء مؤهلون خلال 7 أيام أو استرداد أموالك.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="/ar#get-started" class="px-8 py-4 bg-[#CE1126] text-white rounded-full font-bold w-full sm:w-auto text-center hover:scale-105 transition-transform duration-300 shadow-[0_0_30px_rgba(206,17,38,0.4)]">
+          احصل على خطة قمعي
+        </a>
+        <a href="/ar#why-it-works" class="px-8 py-4 bg-black/50 backdrop-blur-lg border border-white/20 text-white rounded-full font-bold w-full sm:w-auto text-center hover:bg-white hover:text-black transition-colors duration-300">
+          اكتشف كيف يعمل
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Market Context AR -->
+  <section class="py-16 px-4 md:px-6 border-t border-white/5 relative z-10" dir="rtl">
+    <div class="max-w-[1200px] mx-auto reveal">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-display font-bold mb-6">
+            سوق {industry.nameAr} في {emirate.nameAr}
+          </h2>
+          <p class="text-gray-400 leading-relaxed">{emirate.marketContextAr}</p>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bento-card p-6 text-center">
+            <div class="text-3xl font-display font-bold text-[#00cc53] mb-2">7 أيام</div>
+            <div class="text-xs text-gray-400">من الانطلاق إلى أول عملاء</div>
+          </div>
+          <div class="bento-card p-6 text-center">
+            <div class="text-3xl font-display font-bold text-white mb-2">50%</div>
+            <div class="text-xs text-gray-400">متوسط تخفيض التكلفة لكل عميل</div>
+          </div>
+          <div class="bento-card p-6 text-center">
+            <div class="text-3xl font-display font-bold text-white mb-2">30 يوم</div>
+            <div class="text-xs text-gray-400">ضمان استرداد المال</div>
+          </div>
+          <div class="bento-card p-6 text-center border-t-2 border-t-[#CE1126]">
+            <div class="text-3xl font-display font-bold text-[#CE1126] mb-2">+500</div>
+            <div class="text-xs text-gray-400">عميل حول العالم</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Internal links -->
+  <section class="py-12 px-4 md:px-6 border-t border-white/5 relative z-10" dir="rtl">
+    <div class="max-w-[1200px] mx-auto">
+      <h2 class="text-xl font-display font-bold text-white mb-6 text-center">
+        توليد عملاء {industry.nameAr} في جميع إمارات الدولة
+      </h2>
+      <div class="flex flex-wrap gap-3 justify-center">
+        {EMIRATES.map(em => (
+          <a
+            href={`/ar/lead-generation-for-${industry.slug}-in-${em.slug}`}
+            class={`px-4 py-2 rounded-full text-sm border transition-colors ${em.slug === emirate.slug ? 'bg-white text-black border-white font-bold' : 'border-white/20 text-gray-400 hover:border-white/40 hover:text-white'}`}
+          >
+            {em.nameAr}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

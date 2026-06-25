@@ -1,0 +1,158 @@
+export const INDUSTRIES = [
+  {
+    nameEn: 'Real Estate', nameAr: 'العقارات',
+    slug: 'real-estate',
+    termEn: 'property developers and brokers',
+    termAr: 'مطوري العقارات والوسطاء',
+    hero: '/real-estate-hero.png',
+    metaDesc: 'Digital Hype generates qualified property buyer and investor leads for real estate developers and brokers across Dubai and UAE.',
+    faqItems: [
+      { q: 'How does Digital Hype generate real estate leads in Dubai?', a: 'We build project-specific landing pages for one development, run Meta Ads targeting real estate investors and end-users in UAE and GCC, and deploy programmatic SEO to capture "property for sale in Dubai" and investment-related queries.' },
+      { q: 'What CPL should real estate developers expect in UAE?', a: 'Real estate leads in Dubai range from AED 100–400 CPL depending on the project price point. Luxury properties (AED 2M+) have higher CPL but significantly higher commission per transaction.' },
+    ],
+  },
+  {
+    nameEn: 'Healthcare', nameAr: 'الرعاية الصحية',
+    slug: 'healthcare',
+    termEn: 'clinics and hospitals',
+    termAr: 'العيادات والمستشفيات',
+    hero: '/healthcare-hero.png',
+    metaDesc: 'Digital Hype generates qualified patient enquiries for clinics, hospitals and healthcare providers across Dubai and UAE with compliant Meta Ads and organic SEO.',
+    faqItems: [
+      { q: 'How does Digital Hype generate patient leads for healthcare clinics in UAE?', a: 'We create HIPAA-aware Meta Ads campaigns and programmatic SEO pages targeting patients searching for specific medical treatments in Dubai. Each funnel focuses on one service for maximum conversion.' },
+      { q: 'Are your healthcare ads compliant with UAE medical advertising regulations?', a: 'Yes. We follow UAE Ministry of Health advertising guidelines and do not make prohibited medical claims. All creative goes through a compliance review before launch.' },
+    ],
+  },
+  {
+    nameEn: 'Law Firms', nameAr: 'مكاتب المحاماة',
+    slug: 'law-firms',
+    termEn: 'law firms and legal consultants',
+    termAr: 'مكاتب المحاماة والاستشارات القانونية',
+    hero: '/law-firms-hero.png',
+    metaDesc: 'Digital Hype generates qualified client enquiries for law firms and legal consultancies across Dubai and UAE with compliant Meta Ads and programmatic SEO.',
+    faqItems: [
+      { q: 'How does Digital Hype generate leads for law firms in UAE?', a: 'We build practice-area-specific landing pages, run Meta Ads targeting UAE businesses and individuals seeking legal counsel, and deploy programmatic SEO to capture "lawyer in Dubai" and practice-specific queries.' },
+    ],
+  },
+  {
+    nameEn: 'Automotive', nameAr: 'السيارات',
+    slug: 'automotive',
+    termEn: 'dealerships and luxury car rentals',
+    termAr: 'وكالات السيارات وتأجير السيارات الفاخرة',
+    hero: '/automotive-hero.png',
+    metaDesc: 'Digital Hype generates high-quality leads for car dealerships, luxury rentals & automotive businesses across Dubai and the UAE with Meta Ads, SEO and hyperfast landing pages.',
+    faqItems: [
+      { q: 'What is the cost per lead for automotive businesses in Dubai?', a: 'Our automotive lead generation campaigns in Dubai typically achieve a Cost Per Lead (CPL) of AED 30–80 depending on the vehicle segment. Luxury car leads range from AED 60–120 CPL.' },
+    ],
+  },
+  {
+    nameEn: 'B2B Services', nameAr: 'خدمات الشركات',
+    slug: 'b2b-services',
+    termEn: 'B2B companies and agencies',
+    termAr: 'شركات ووكالات B2B',
+    hero: '/b2b-services-hero.png',
+    metaDesc: 'Digital Hype builds B2B lead generation systems for agencies, consultancies and service companies across Dubai and UAE.',
+    faqItems: [
+      { q: 'How long does it take to start generating B2B leads?', a: 'Meta Ads leads typically start within 48–72 hours of launch. Organic SEO leads start building within 30–60 days. Most clients see their first qualified B2B enquiry within 7 days of kickoff.' },
+    ],
+  },
+  {
+    nameEn: 'Spas & Wellness', nameAr: 'المنتجعات الصحية',
+    slug: 'spas-wellness',
+    termEn: 'spas and wellness centers',
+    termAr: 'المنتجعات والمراكز الصحية',
+    hero: '/spas-wellness-hero.png',
+    metaDesc: 'Digital Hype drives spa bookings and wellness consultation enquiries for spas, wellness centres and beauty brands across Dubai and UAE.',
+    faqItems: [
+      { q: 'What CPL can spas expect in Dubai?', a: 'Spa leads in Dubai range from AED 30–80 CPL for standard treatments. Premium medical aesthetics achieve AED 60–120 CPL but generate higher per-appointment revenue.' },
+    ],
+  },
+  {
+    nameEn: 'Hotels & Hospitality', nameAr: 'الفنادق والضيافة',
+    slug: 'hotels-hospitality',
+    termEn: 'hotels and luxury resorts',
+    termAr: 'الفنادق والمنتجعات الفاخرة',
+    hero: '/hotels-hospitality-hero.png',
+    metaDesc: 'Digital Hype drives direct hotel bookings and hospitality enquiries for hotels and resorts across Dubai and UAE with Meta Ads and SEO.',
+    faqItems: [
+      { q: 'Can you reduce OTA dependency for hotels?', a: 'Yes. Our direct booking funnels typically reduce OTA dependency by 20–40% within 90 days by capturing direct search and social intent, saving 15–25% OTA commission per booking.' },
+    ],
+  },
+  {
+    nameEn: 'eCommerce', nameAr: 'التجارة الإلكترونية',
+    slug: 'ecommerce',
+    termEn: 'online stores and eCommerce brands',
+    termAr: 'المتاجر الإلكترونية والعلامات التجارية',
+    hero: '/ecommerce-hero.png',
+    metaDesc: 'Digital Hype drives online sales and customer acquisition for eCommerce brands and online stores across UAE with Meta Ads and programmatic SEO.',
+    faqItems: [
+      { q: 'What ROAS can UAE eCommerce brands expect?', a: 'Well-optimised Meta Ads campaigns in UAE achieve 2.5x–5x ROAS within 60 days of launch. High-ticket products (AED 500+) often achieve 4x–8x ROAS with proper funnel structure.' },
+    ],
+  },
+  {
+    nameEn: 'Construction', nameAr: 'المقاولات',
+    slug: 'construction',
+    termEn: 'contractors and construction firms',
+    termAr: 'المقاولون وشركات البناء',
+    hero: '/construction-hero.png',
+    metaDesc: 'Digital Hype generates high-value project enquiries for construction companies, contractors and fit-out firms across Dubai and UAE.',
+    faqItems: [
+      { q: 'What construction sectors does Digital Hype serve?', a: 'We serve general contractors, specialist subcontractors, interior fit-out companies, MEP contractors, civil engineering firms, and construction project management consultants operating in UAE.' },
+    ],
+  },
+  {
+    nameEn: 'Education', nameAr: 'التعليم',
+    slug: 'education',
+    termEn: 'schools, universities, and training centers',
+    termAr: 'المدارس والجامعات ومراكز التدريب',
+    hero: '/education-hero.png',
+    metaDesc: 'Digital Hype drives student enrolment enquiries for schools, universities and training centres across Dubai and UAE with Meta Ads and programmatic SEO.',
+    faqItems: [
+      { q: 'What education sectors do you serve?', a: 'We serve private K-12 schools, universities, vocational training centres, professional certification programs, language schools, and online learning platforms operating in UAE.' },
+    ],
+  },
+  {
+    nameEn: 'Travel Agencies', nameAr: 'وكالات السفر',
+    slug: 'travel-agencies',
+    termEn: 'travel agencies and tour operators',
+    termAr: 'وكالات السفر ومنظمي الرحلات',
+    hero: '/travel-agencies-hero.png',
+    metaDesc: 'Digital Hype generates holiday enquiries and tour bookings for travel agencies and tour operators across Dubai and UAE.',
+    faqItems: [
+      { q: 'What destinations work best for UAE travel agency lead generation?', a: 'Top-performing destinations include: Maldives, Europe, Southeast Asia (Thailand, Bali, Japan), and African safari packages. Umrah and Hajj packages are also high-demand in UAE.' },
+    ],
+  },
+  {
+    nameEn: 'Restaurants & Cafes', nameAr: 'المطاعم والمقاهي',
+    slug: 'restaurants-cafes',
+    termEn: 'restaurants, cafes, and fine dining',
+    termAr: 'المطاعم والمقاهي الفاخرة',
+    hero: '/restaurants-cafes-hero.png',
+    metaDesc: 'Digital Hype drives diner reservations and catering enquiries for restaurants and cafes across Dubai and UAE with Meta Ads and local SEO.',
+    faqItems: [
+      { q: 'What results can Dubai restaurants expect?', a: 'Our restaurant clients in Dubai see 50–150 new reservation or enquiry leads per month within 60 days. Catering enquiries tend to be 10–30/month but at significantly higher average order values.' },
+    ],
+  },
+  {
+    nameEn: 'Fitness & Gyms', nameAr: 'النوادي الرياضية',
+    slug: 'fitness-gyms',
+    termEn: 'fitness centers, gyms, and personal trainers',
+    termAr: 'المراكز الرياضية والمدربين الشخصيين',
+    hero: '/fitness-gyms-hero.png',
+    metaDesc: 'Digital Hype fills gym memberships and PT bookings for fitness centres across Dubai and UAE with targeted Meta Ads and programmatic SEO.',
+    faqItems: [
+      { q: 'What is a typical CPL for gym membership campaigns in Dubai?', a: 'Gym membership leads in Dubai typically cost AED 25–60 CPL. Personal training packages achieve AED 40–90 CPL. Premium boutique fitness studios see AED 50–100 CPL.' },
+    ],
+  },
+  {
+    nameEn: 'Cleaning Services', nameAr: 'خدمات التنظيف',
+    slug: 'cleaning-services',
+    termEn: 'cleaning companies and facility management',
+    termAr: 'شركات التنظيف وإدارة المرافق',
+    hero: '/cleaning-services-hero.png',
+    metaDesc: 'Digital Hype fills cleaning service bookings for residential and commercial cleaning companies across Dubai and UAE with Meta Ads and SEO.',
+    faqItems: [
+      { q: 'What CPL should I expect for cleaning service leads in Dubai?', a: 'Residential cleaning leads in Dubai achieve AED 20–50 CPL. Commercial cleaning B2B leads range AED 40–80 CPL.' },
+    ],
+  },
+];

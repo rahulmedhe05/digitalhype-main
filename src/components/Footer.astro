@@ -1,0 +1,162 @@
+---
+import { INDUSTRIES } from '../data/industries';
+import { EMIRATES } from '../data/emirates';
+
+interface Props { lang?: string; }
+const { lang = 'en' } = Astro.props;
+const isAr = lang === 'ar';
+
+// Top 7 industry+emirate combos for keyword footer links (highest search volume)
+const topLinks = [
+  { label: 'Real Estate Lead Generation Dubai',       href: '/lead-generation-for-real-estate-in-dubai' },
+  { label: 'Real Estate Lead Generation Abu Dhabi',   href: '/lead-generation-for-real-estate-in-abu-dhabi' },
+  { label: 'Healthcare Lead Generation Dubai',        href: '/lead-generation-for-healthcare-in-dubai' },
+  { label: 'Law Firm Lead Generation Dubai',          href: '/lead-generation-for-law-firms-in-dubai' },
+  { label: 'B2B Lead Generation Dubai',               href: '/lead-generation-for-b2b-services-in-dubai' },
+  { label: 'Automotive Lead Generation Dubai',        href: '/lead-generation-for-automotive-in-dubai' },
+  { label: 'Hotels Lead Generation Dubai',            href: '/lead-generation-for-hotels-hospitality-in-dubai' },
+  { label: 'Construction Lead Generation Dubai',      href: '/lead-generation-for-construction-in-dubai' },
+  { label: 'Restaurant Lead Generation Dubai',        href: '/lead-generation-for-restaurants-cafes-in-dubai' },
+  { label: 'Real Estate Lead Generation Sharjah',     href: '/lead-generation-for-real-estate-in-sharjah' },
+  { label: 'Healthcare Lead Generation Abu Dhabi',    href: '/lead-generation-for-healthcare-in-abu-dhabi' },
+  { label: 'Fitness Lead Generation Dubai',           href: '/lead-generation-for-fitness-gyms-in-dubai' },
+];
+---
+
+<footer class="border-t border-white/10 bg-black pt-16 md:pt-20 pb-8 md:pb-10 px-4 md:px-6 relative z-10">
+  <div class="max-w-[1400px] mx-auto">
+
+    <!-- Top: Brand + Nav grid -->
+    <div class="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-12 md:gap-16 mb-14">
+
+      <!-- Brand -->
+      <div>
+        <a href="/" class="text-2xl md:text-3xl font-bold font-display tracking-tighter mb-4 flex items-center gap-3 hover:opacity-80 transition-opacity">
+          <img src="/logo.png" alt="Digital Hype Logo" class="h-9 w-9 object-contain" width="36" height="36" />
+          DIGITAL HYPE
+        </a>
+        <p class="text-gray-400 text-sm max-w-[340px] leading-relaxed mb-5">
+          {isAr
+            ? 'ديجيتال هايب — وكالة توليد العملاء الرائدة في الإمارات. صفحات هبوط فائقة السرعة، إعلانات ميتا، وSEO مبرمج لجميع الإمارات السبع.'
+            : 'Digital Hype (Yantramayaa Designs Private Limited) — UAE\'s lead generation agency for landing pages, Meta Ads & programmatic SEO across all 7 Emirates.'
+          }
+        </p>
+        <div class="space-y-1 mb-5">
+          <p class="text-xs text-gray-500 font-bold uppercase tracking-widest mb-2">
+            {isAr ? 'إحصائيات 2026:' : '2026 Benchmarks:'}
+          </p>
+          <p class="text-xs text-gray-500">✓ {isAr ? 'متوسط تخفيض التكلفة: 43%' : 'Avg. CPA reduction: 43%'}</p>
+          <p class="text-xs text-gray-500">✓ {isAr ? 'أول عملاء خلال 7 أيام' : 'First leads in 7 days'}</p>
+          <p class="text-xs text-gray-500">✓ {isAr ? 'ضمان استرداد 30 يوم' : '30-day money-back guarantee'}</p>
+        </div>
+        <a href="tel:+971569583090" class="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          +971 56 958 3090
+        </a>
+      </div>
+
+      <!-- Nav columns -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 text-sm">
+
+        <!-- Industries col 1 -->
+        <div class="flex flex-col gap-2.5">
+          <span class="text-white font-bold text-xs uppercase tracking-widest mb-1">
+            {isAr ? 'القطاعات' : 'Industries'}
+          </span>
+          {INDUSTRIES.slice(0, 7).map(ind => (
+            <a href={`/${ind.slug}`} class="text-gray-400 hover:text-white transition-colors leading-snug">
+              {isAr ? ind.nameAr : ind.nameEn}
+            </a>
+          ))}
+        </div>
+
+        <!-- Industries col 2 -->
+        <div class="flex flex-col gap-2.5">
+          <span class="text-white font-bold text-xs uppercase tracking-widest mb-1">&nbsp;</span>
+          {INDUSTRIES.slice(7).map(ind => (
+            <a href={`/${ind.slug}`} class="text-gray-400 hover:text-white transition-colors leading-snug">
+              {isAr ? ind.nameAr : ind.nameEn}
+            </a>
+          ))}
+          <a href="/case-studies" class="text-gray-400 hover:text-white transition-colors leading-snug mt-1">
+            {isAr ? 'دراسات الحالة' : 'Case Studies'}
+          </a>
+        </div>
+
+        <!-- Locations -->
+        <div class="flex flex-col gap-2.5">
+          <span class="text-white font-bold text-xs uppercase tracking-widest mb-1">
+            {isAr ? 'المناطق' : 'Locations'}
+          </span>
+          {EMIRATES.map(em => (
+            <a
+              href={`/lead-generation-for-real-estate-in-${em.slug}`}
+              class="text-gray-400 hover:text-white transition-colors leading-snug"
+            >
+              {isAr ? em.nameAr : em.nameEn}
+            </a>
+          ))}
+        </div>
+
+        <!-- Company -->
+        <div class="flex flex-col gap-2.5">
+          <span class="text-white font-bold text-xs uppercase tracking-widest mb-1">
+            {isAr ? 'الشركة' : 'Company'}
+          </span>
+          <a href="/#why-it-works" class="text-gray-400 hover:text-white transition-colors">{isAr ? 'كيف يعمل' : 'How It Works'}</a>
+          <a href="/#pricing" class="text-gray-400 hover:text-white transition-colors">{isAr ? 'الأسعار' : 'Pricing'}</a>
+          <a href="/case-studies" class="text-gray-400 hover:text-white transition-colors">{isAr ? 'نتائجنا' : 'Results'}</a>
+          <a href="/#get-started" class="text-gray-400 hover:text-white transition-colors">{isAr ? 'تواصل معنا' : 'Contact'}</a>
+          <a href={`https://share.google/3O0iRRJIekUgwHbL3`} target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">{isAr ? 'آراء العملاء' : 'Google Reviews'}</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popular Searches — keyword-rich internal links for SEO -->
+    <div class="border-t border-white/5 pt-10 mb-10">
+      <p class="text-xs font-bold uppercase tracking-widest text-gray-600 mb-4">
+        {isAr ? 'صفحات شائعة:' : 'Popular searches:'}
+      </p>
+      <div class="flex flex-wrap gap-2">
+        {topLinks.map(link => (
+          <a
+            href={link.href}
+            class="px-3 py-1.5 rounded-full border border-white/8 text-xs text-gray-500 hover:text-white hover:border-white/25 transition-all duration-200"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Emirates area coverage — GEO keyword block -->
+    <div class="border-t border-white/5 pt-8 mb-10">
+      <p class="text-xs font-bold uppercase tracking-widest text-gray-600 mb-4">
+        {isAr ? 'نغطي جميع مناطق الإمارات:' : 'Areas we cover across UAE:'}
+      </p>
+      <p class="text-xs text-gray-600 leading-relaxed max-w-5xl">
+        {EMIRATES.map((em, i) => (
+          <>
+            <strong class="text-gray-500">{em.nameEn}:</strong>{' '}
+            <span>{em.districts.join(' · ')}</span>
+            {i < EMIRATES.length - 1 ? ' — ' : ''}
+          </>
+        ))}
+      </p>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center pt-6 border-t border-white/5 text-[10px] md:text-xs text-gray-600 gap-3">
+      <p>
+        &copy; 2026 Digital Hype by Yantramayaa Designs Private Limited. All rights reserved.
+        <span class="mx-2">|</span>
+        <a href="/privacy-policy" class="hover:text-white transition-colors">Privacy Policy</a>
+        <span class="mx-2">|</span>
+        <a href="/terms-of-service" class="hover:text-white transition-colors">Terms of Service</a>
+      </p>
+      <p>
+        Lead generation agency serving Dubai · Abu Dhabi · Sharjah · Ajman · Ras Al Khaimah · Fujairah · Umm Al Quwain
+      </p>
+    </div>
+  </div>
+</footer>

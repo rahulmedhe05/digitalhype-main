@@ -1,0 +1,326 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../data/site';
+import { INDUSTRIES } from '../data/industries';
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "What does Digital Hype do?", "acceptedAnswer": { "@type": "Answer", "text": "Digital Hype (Yantramayaa Designs Private Limited) is a UAE-based lead generation agency that builds hyperfast landing pages, runs Meta Ads campaigns and deploys programmatic SEO systems for businesses in Dubai and across the UAE. We focus on generating qualified leads within 7 days of kickoff." } },
+    { "@type": "Question", "name": "How much does Digital Hype cost?", "acceptedAnswer": { "@type": "Answer", "text": "Our packages start from AED 399 for a high-converting landing page setup. Programmatic SEO for one emirate is AED 400, and full UAE SEO coverage across all 7 emirates is AED 1,999. Meta Ads management is charged at 5% of your ad budget. We offer a 30-day money-back guarantee on all packages." } },
+    { "@type": "Question", "name": "How quickly can Digital Hype generate leads for my business?", "acceptedAnswer": { "@type": "Answer", "text": "Meta Ads campaigns typically generate the first leads within 48–72 hours of launch. The full landing page and ad system is live within 7 days of kickoff. Organic SEO leads build over 30–90 days as pages get indexed and begin ranking." } },
+    { "@type": "Question", "name": "Does Digital Hype work with Arabic-speaking businesses?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Digital Hype is fully bilingual — every landing page includes an Arabic toggle, all Meta Ads creative is available in Arabic and English, and we have a dedicated Arabic programmatic SEO system targeting UAE Arabic speakers." } },
+    { "@type": "Question", "name": "What industries does Digital Hype serve in UAE?", "acceptedAnswer": { "@type": "Answer", "text": "We serve 14 industries: Real Estate, Healthcare, Law Firms, Automotive, B2B Services, Spas & Wellness, Hotels & Hospitality, eCommerce, Construction, Education, Travel Agencies, Restaurants & Cafes, Fitness & Gyms, and Cleaning Services across all 7 UAE emirates." } },
+    { "@type": "Question", "name": "What is the Digital Hype 30-day guarantee?", "acceptedAnswer": { "@type": "Answer", "text": "If you do not receive qualified leads within the first 30 days of your campaign launch, Digital Hype refunds 100% of your setup fee. Ad spend is managed separately and is not included in the refund." } }
+  ]
+};
+
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How Digital Hype Generates Leads for UAE Businesses",
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "Book a Free Funnel Planning Session", "text": "Schedule a 30-minute call with our team to map your best offer, identify the right audience and plan your UAE lead generation funnel." },
+    { "@type": "HowToStep", "position": 2, "name": "We Build Your Hyperfast Landing Page", "text": "Our team designs and develops your conversion-optimised landing page in 3–5 days, with Arabic/English toggle and mobile-first layout." },
+    { "@type": "HowToStep", "position": 3, "name": "We Launch Your Meta Ads Campaign", "text": "Precision Meta Ads campaigns go live targeting your exact UAE buyer profile — by location, income, interest and behaviour." },
+    { "@type": "HowToStep", "position": 4, "name": "Programmatic SEO Pages Go Live", "text": "We publish 7-emirate SEO pages capturing organic search intent across Dubai, Abu Dhabi, Sharjah and all UAE cities." },
+    { "@type": "HowToStep", "position": 5, "name": "You Receive Qualified Lead Notifications", "text": "Leads arrive via WhatsApp, email and your CRM in real time. Weekly performance reports keep you informed on CPL and ROI." }
+  ]
+};
+---
+
+<BaseLayout
+  title="Lead Generation Agency Dubai & UAE | Digital Hype"
+  description="Get qualified leads for your UAE business in 7 days. Digital Hype builds landing pages, Meta Ads & SEO across Dubai, Abu Dhabi, Sharjah & all 7 Emirates. 30-day money-back guarantee."
+  canonical={`${SITE.domain}/`}
+  ogTitle="Lead Generation Agency Dubai & UAE | Digital Hype"
+  ogDescription="Landing pages + Meta Ads + Programmatic SEO — one system for UAE businesses. First leads in 7 days or your money back. All 7 Emirates covered."
+  ogImage="/hero.webp"
+  hreflangEn={`${SITE.domain}/`}
+  hreflangAr={`${SITE.domain}/ar`}
+  schema={[faqSchema, howToSchema]}
+  keywords="lead generation agency dubai, lead generation UAE, digital marketing agency dubai, programmatic SEO UAE, meta ads agency dubai, SEO agency dubai, landing page dubai, B2B lead generation UAE"
+  speakableSelectors={['h1', '.speakable']}
+  pageType="WebPage"
+>
+
+  <!-- Hero -->
+  <section class="relative min-h-[100svh] flex flex-col items-center justify-center pt-28 md:pt-20 px-4 md:px-6 overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-40 mix-blend-screen pointer-events-none flex items-center justify-center">
+      <img src="/hero.webp" fetchpriority="high" alt="Digital Hype UAE lead generation system" class="w-full h-full object-cover scale-105" width="1920" height="1080" />
+      <div class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black"></div>
+    </div>
+
+    <div class="max-w-[1200px] mx-auto text-center z-10 w-full reveal active relative">
+      <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/10 bg-black/40 backdrop-blur-xl mt-12 md:mt-24 mb-8 md:mb-12 shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+        <span class="text-xs font-semibold tracking-[0.2em] uppercase text-gray-300">For Dubai and UAE offers that need leads now</span>
+      </div>
+
+      <h1 class="text-[3.5rem] leading-[1] md:text-8xl font-bold font-display tracking-tighter mb-6">
+        Turn one offer into a <br /> <span class="text-glow italic">lead machine.</span>
+      </h1>
+
+      <h2 class="text-xl md:text-3xl font-display font-semibold text-gray-300 mb-6 drop-shadow-lg">
+        Hyperfast landing page + Meta ads + organic SEO.
+      </h2>
+
+      <p class="text-base md:text-xl text-gray-400 max-w-3xl mx-auto font-light leading-relaxed mb-10 px-2 drop-shadow-md">
+        Digital Hype builds a hyperfast landing page for one product or one premium service, then aligns Meta ads and organic SEO around it.
+        The result is a direct sales engine that looks expensive, feels trustworthy and moves serious buyers to enquire faster.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center px-4 w-full md:w-auto mb-16">
+        <a href="#get-started" class="px-8 py-4 bg-[#CE1126] text-white rounded-full font-bold w-full sm:w-auto text-center hover:scale-105 transition-transform duration-300 shadow-[0_0_30px_rgba(206,17,38,0.4)]">
+          Get My Funnel Plan
+        </a>
+        <a href="#why-it-works" class="px-8 py-4 bg-black/50 backdrop-blur-lg border border-white/20 text-white rounded-full font-bold w-full sm:w-auto text-center hover:bg-white hover:text-black transition-colors duration-300">
+          See Conversion Logic
+        </a>
+      </div>
+
+      <!-- Google Rating -->
+      <a href={SITE.googleReviewUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-4 bg-white/5 border border-white/10 hover:bg-white/10 transition-colors backdrop-blur-md rounded-full px-6 py-3 mx-auto mt-[-1rem] mb-12 shadow-[0_0_20px_rgba(255,255,255,0.05)] reveal">
+        <div class="flex items-center gap-1">
+          {[...Array(5)].map(() => (
+            <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+            </svg>
+          ))}
+        </div>
+        <div class="text-sm text-gray-300 font-medium">
+          <span class="font-bold text-white">5.0</span> Rating for <span class="font-bold text-white">Yantramayaa Designs Private Limited</span>
+        </div>
+      </a>
+
+      <!-- Trust badges -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto text-left relative z-10">
+        <div class="bento-card p-6">
+          <div class="font-bold text-white mb-2 font-display flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-white"></div> Offer model</div>
+          <div class="text-sm text-gray-400">One product. One premium page. One clear enquiry path.</div>
+        </div>
+        <div class="bento-card p-6">
+          <div class="font-bold text-white mb-2 font-display flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-[#CE1126]"></div> Acquisition stack</div>
+          <div class="text-sm text-gray-400">Landing page + Meta ads + organic SEO working as one system.</div>
+        </div>
+        <div class="bento-card p-6">
+          <div class="font-bold text-white mb-2 font-display flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-[#00732F]"></div> Buyer safety</div>
+          <div class="text-sm text-gray-400">Delivered by YantraMayaa Designs with a month-one refund guarantee.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Rail -->
+  <section class="py-12 border-y border-white/10 bg-black/80 backdrop-blur-xl relative z-10">
+    <div class="max-w-[1400px] mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-8 text-sm text-gray-400">
+      <div class="flex items-center gap-3">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+        <span><strong>YantraMayaa Designs Pvt Ltd.</strong> Premier global digital agency.</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        <span>Month-One Refund Guarantee. Risk-free deployment.</span>
+      </div>
+      <a href="https://design.yantramayaa.com/portfolio/" target="_blank" rel="noopener noreferrer" class="font-bold text-white hover:text-[#00732F] transition-colors flex items-center gap-2">
+        Review Portfolio &rarr;
+      </a>
+    </div>
+    <div class="mt-8 bg-[#CE1126]/10 border-y border-[#CE1126]/30 py-4">
+      <div class="max-w-[1400px] mx-auto px-4 md:px-6 text-xs md:text-sm text-[#ff4d60] font-mono flex flex-wrap gap-6 justify-center">
+        <span>TRAFFIC LOSS: Slow pages burn paid intent.</span>
+        <span class="hidden md:inline">|</span>
+        <span>SPLIT ATTENTION: Generic websites leak buyers.</span>
+        <span class="hidden md:inline">|</span>
+        <span>WEAK POSITIONING: Beautiful design fails without one clear path.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Performance Stats -->
+  <section class="py-20 md:py-32 px-4 md:px-6 bg-[#030303] relative z-10 border-b border-white/5">
+    <div class="max-w-[1200px] mx-auto text-center reveal">
+      <h2 class="text-sm font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">The Digital Hype Impact</h2>
+      <div class="grid md:grid-cols-3 gap-8 mt-12">
+        <div class="bento-card p-8">
+          <div class="text-5xl font-display font-bold text-white mb-2">7 Days</div>
+          <div class="text-sm text-gray-400">Average time from kickoff to live lead generation funnel.</div>
+        </div>
+        <div class="bento-card p-8 border-t-2 border-t-[#00732F]">
+          <div class="text-5xl font-display font-bold text-[#00cc53] mb-2">Up to 50%</div>
+          <div class="text-sm text-gray-400">Average reduction in Cost Per Lead (CPL) compared to generic websites.</div>
+        </div>
+        <div class="bento-card p-8">
+          <div class="text-5xl font-display font-bold text-white mb-2">30 Days</div>
+          <div class="text-sm text-gray-400">The guarantee period. Serious intent generated or your money back.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why It Works -->
+  <section id="why-it-works" class="py-20 md:py-32 px-4 md:px-6 relative z-10">
+    <div class="max-w-[1200px] mx-auto">
+      <h2 class="text-4xl md:text-6xl font-display font-bold text-center mb-6 reveal">This is a landing page sales engine,<br />not a normal website.</h2>
+      <p class="text-center text-gray-400 max-w-3xl mx-auto mb-16 reveal stagger-1">
+        Normal websites explain the whole company. Digital Hype compresses the story into one premium conversion path so ad traffic, search intent and enquiry behaviour all point toward the same action.
+      </p>
+      <div class="grid grid-cols-2 gap-3 md:gap-8 reveal stagger-2">
+        <div class="bento-card p-4 md:p-8 border-t-2 md:border-t-4 border-t-gray-800 opacity-70 hover:opacity-100 flex flex-col">
+          <h3 class="text-[14px] md:text-2xl font-bold mb-2 md:mb-4 font-display text-gray-400">Normal Website</h3>
+          <p class="text-[9px] md:text-sm font-semibold uppercase tracking-wider text-gray-400 mb-2 md:mb-6 leading-tight">Too many pages. Too many choices. Too much leakage.</p>
+          <ul class="space-y-2 md:space-y-3 text-[10px] md:text-sm text-gray-400 mt-auto">
+            <li class="flex gap-1 md:gap-2 items-start"><span>&times;</span> <span>Slow load speeds</span></li>
+            <li class="flex gap-1 md:gap-2 items-start"><span>&times;</span> <span>Scattered navigation</span></li>
+            <li class="flex gap-1 md:gap-2 items-start"><span>&times;</span> <span>Business info instead of buying path</span></li>
+            <li class="flex gap-1 md:gap-2 items-start"><span>&times;</span> <span>Product urgency falls</span></li>
+          </ul>
+        </div>
+        <div class="bento-card p-4 md:p-8 border-t-2 md:border-t-4 border-t-[#00732F] bg-[#00732F]/5 relative overflow-hidden flex flex-col">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-[#00732F]/20 blur-3xl rounded-full"></div>
+          <h3 class="text-[14px] md:text-2xl font-bold mb-2 md:mb-4 font-display text-white relative z-10">Digital Hype Page</h3>
+          <p class="text-[9px] md:text-sm font-semibold uppercase tracking-wider text-[#00cc53] mb-2 md:mb-6 leading-tight relative z-10">One product. One story. One serious path to enquiry.</p>
+          <ul class="space-y-2 md:space-y-3 text-[10px] md:text-sm text-white relative z-10 mt-auto">
+            <li class="flex gap-1 md:gap-2 text-[#00cc53] items-start"><span>&check;</span> <span>Sharper positioning</span></li>
+            <li class="flex gap-1 md:gap-2 text-[#00cc53] items-start"><span>&check;</span> <span>Premium glassmorphism presentation</span></li>
+            <li class="flex gap-1 md:gap-2 text-[#00cc53] items-start"><span>&check;</span> <span>Semantic HTML for organic SEO dominance</span></li>
+            <li class="flex gap-1 md:gap-2 text-[#00cc53] items-start"><span>&check;</span> <span>Exact match for Meta ads traffic</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries -->
+  <section id="services" class="py-20 md:py-32 px-4 md:px-6 bg-[#030303] border-y border-white/5 relative z-10">
+    <div class="max-w-[1200px] mx-auto">
+      <h2 class="text-3xl md:text-5xl font-display font-bold text-center mb-4 reveal">14 Industries. 7 Emirates.</h2>
+      <p class="text-center text-gray-400 max-w-2xl mx-auto mb-12 reveal stagger-1">
+        Every industry page is optimised for local UAE search intent with dedicated programmatic SEO coverage.
+      </p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 reveal stagger-2">
+        {INDUSTRIES.map(industry => (
+          <a href={`/${industry.slug}`} class="bento-card p-6 group hover:border-white/30 transition-all">
+            <h3 class="font-bold text-white font-display mb-2">{industry.nameEn}</h3>
+            <p class="text-xs text-gray-500 mb-4">{industry.termEn}</p>
+            <div class="text-xs font-medium text-[#00cc53] opacity-0 group-hover:opacity-100 transition-opacity">
+              View lead gen pages →
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4-Step Process -->
+  <section id="process" class="py-20 md:py-32 px-4 md:px-6 relative z-10">
+    <div class="max-w-[1200px] mx-auto">
+      <h2 class="text-3xl md:text-5xl font-display font-bold text-center mb-16 reveal">How It Works</h2>
+      <div class="grid md:grid-cols-4 gap-8 reveal stagger-1">
+        {[
+          { n: '01', title: 'Funnel Brief', desc: '30-min call to map your best offer, target audience and UAE market position.' },
+          { n: '02', title: 'Landing Page Live', desc: 'Hyperfast, conversion-optimised page in 3–5 days. Arabic + English.' },
+          { n: '03', title: 'Ads + SEO Launch', desc: 'Meta Ads and programmatic SEO go live simultaneously. 7-emirate coverage.' },
+          { n: '04', title: 'Leads Arrive', desc: 'Qualified enquiries via WhatsApp and email. Weekly CPL reports.' },
+        ].map(step => (
+          <div class="bento-card p-6">
+            <div class="text-4xl font-display font-bold text-white/10 mb-4">{step.n}</div>
+            <h3 class="font-bold text-white font-display mb-2">{step.title}</h3>
+            <p class="text-sm text-gray-400">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="py-20 md:py-32 px-4 md:px-6 bg-[#030303] border-y border-white/5 relative z-10">
+    <div class="max-w-[900px] mx-auto text-center reveal">
+      <h2 class="text-3xl md:text-5xl font-display font-bold mb-4">Simple, Transparent Pricing</h2>
+      <p class="text-gray-400 mb-12">50% upfront. 50% after 15 days when you see results. 30-day money-back guarantee.</p>
+      <div class="grid md:grid-cols-3 gap-6 text-left">
+        <div class="bento-card p-8">
+          <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Landing Page</div>
+          <div class="text-4xl font-display font-bold text-white mb-1">AED 399</div>
+          <div class="text-xs text-gray-500 mb-6">One-time setup</div>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li class="flex gap-2"><span class="text-[#00cc53]">✓</span> Hyperfast, conversion-first</li>
+            <li class="flex gap-2"><span class="text-[#00cc53]">✓</span> Arabic + English toggle</li>
+            <li class="flex gap-2"><span class="text-[#00cc53]">✓</span> Mobile-first design</li>
+            <li class="flex gap-2"><span class="text-[#00cc53]">✓</span> WhatsApp CTA integration</li>
+          </ul>
+        </div>
+        <div class="bento-card p-8 border-t-4 border-t-[#00732F] bg-[#00732F]/5">
+          <div class="text-xs font-bold text-[#00cc53] uppercase tracking-widest mb-3">Programmatic SEO · UAE</div>
+          <div class="text-4xl font-display font-bold text-white mb-1">AED 1,999</div>
+          <div class="text-xs text-gray-500 mb-6">All 7 emirates</div>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li class="flex gap-2"><span class="text-[#00cc53]">✓</span> 7-emirate page coverage</li>
+            <li class="flex gap-2"><span class="text-[#00cc53]">✓</span> Schema + FAQ markup</li>
+            <li class="flex gap-2"><span class="text-[#00cc53]">✓</span> Arabic + English SEO</li>
+            <li class="flex gap-2"><span class="text-[#00cc53]">✓</span> Sitemap submission</li>
+          </ul>
+        </div>
+        <div class="bento-card p-8">
+          <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Meta Ads Management</div>
+          <div class="text-4xl font-display font-bold text-white mb-1">5%</div>
+          <div class="text-xs text-gray-500 mb-6">of monthly ad budget</div>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li class="flex gap-2"><span class="text-[#00cc53]">✓</span> Campaign setup & creative</li>
+            <li class="flex gap-2"><span class="text-[#00cc53]">✓</span> Arabic + English ads</li>
+            <li class="flex gap-2"><span class="text-[#00cc53]">✓</span> Weekly CPL reporting</li>
+            <li class="flex gap-2"><span class="text-[#00cc53]">✓</span> Continuous optimisation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 md:py-32 px-4 md:px-6 relative z-10">
+    <div class="max-w-[900px] mx-auto">
+      <h2 class="text-3xl md:text-5xl font-display font-bold text-center mb-12 reveal">Frequently Asked Questions</h2>
+      <div class="space-y-4 reveal stagger-1">
+        {[
+          { q: 'What does Digital Hype do?', a: 'Digital Hype builds a hyperfast landing page, runs Meta Ads and deploys programmatic SEO for one product or service. The result is a direct-response lead engine that generates qualified enquiries from UAE buyers within 7 days.' },
+          { q: 'How much does Digital Hype cost?', a: 'Landing page from AED 399. Full UAE programmatic SEO AED 1,999. Meta Ads management at 5% of budget. 50% upfront, 50% after 15 days of results. 30-day money-back guarantee on all packages.' },
+          { q: 'How quickly will I see leads?', a: 'Meta Ads generate the first enquiries within 48–72 hours. The full system is live within 7 days. Organic SEO leads build over 30–90 days as Google indexes your pages.' },
+          { q: 'Does Digital Hype work with Arabic businesses?', a: 'Yes. Every landing page has an Arabic/English toggle. Meta Ads creative is built in both languages. Our Arabic programmatic SEO system covers all 7 UAE emirates.' },
+          { q: 'What is the 30-day guarantee?', a: 'If you do not receive qualified leads within 30 days of launch, we refund 100% of your setup fee — no questions asked. Ad spend is managed separately.' },
+        ].map(item => (
+          <div class="bento-card p-6 border-l-2 border-l-white/10">
+            <h3 class="font-bold text-white mb-3 font-display">{item.q}</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / Form -->
+  <section id="get-started" class="py-20 md:py-32 px-4 md:px-6 bg-[#030303] relative z-10 border-t border-white/5">
+    <div class="max-w-[700px] mx-auto text-center reveal">
+      <h2 class="text-4xl md:text-6xl font-display font-bold mb-6">Ready to get leads?</h2>
+      <p class="text-gray-400 mb-10 text-lg">Fill in the brief — we'll send your personalised funnel plan within 24 hours.</p>
+      <form class="space-y-4 text-left" name="homepage-enquiry" method="POST" data-netlify="true">
+        <input type="hidden" name="source" value="homepage" />
+        <div class="grid md:grid-cols-2 gap-4">
+          <input type="text" name="name" placeholder="Your Name" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-white/30 transition-colors" />
+          <input type="email" name="email" placeholder="Email Address" required class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-white/30 transition-colors" />
+        </div>
+        <input type="tel" name="phone" placeholder="WhatsApp Number (with country code)" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-white/30 transition-colors" />
+        <select name="industry" class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-white/30 transition-colors appearance-none">
+          <option value="" disabled selected class="bg-black text-gray-400">Select your industry</option>
+          {INDUSTRIES.map(i => <option value={i.slug} class="bg-black">{i.nameEn}</option>)}
+        </select>
+        <textarea name="message" placeholder="Describe your offer and target customer in UAE..." rows={3} class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-white/30 transition-colors resize-none"></textarea>
+        <button type="submit" class="w-full py-4 bg-[#CE1126] text-white rounded-full font-bold hover:bg-[#ff1a33] transition-colors duration-300 shadow-[0_0_30px_rgba(206,17,38,0.4)] text-lg">
+          Get My Free Funnel Plan →
+        </button>
+        <p class="text-center text-xs text-gray-500">No commitment. Free plan delivered in 24 hours. 30-day money-back guarantee on all packages.</p>
+      </form>
+    </div>
+  </section>
+
+  <div class="mouse-glow"></div>
+</BaseLayout>
